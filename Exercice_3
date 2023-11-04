@@ -1,0 +1,51 @@
+#include <iostream>
+#include <list>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+struct Person {
+    string nom;
+    string prenom;
+    int age;
+};
+
+bool comparePerson(const Person& p1, const Person& p2) {
+    if (p1.nom != p2.nom) {
+        return p1.nom < p2.nom;
+    }
+    return p1.prenom < p2.prenom;
+}
+
+int main() {
+   list<Person> listePersonnes;
+cout << "Entrez des personnes (nom prénom âge), tapez 'q' pour terminer :\n";
+
+    while (true) {
+       string nom, prenom;
+        int age;
+
+       cout << "Nom : ";
+        cin >> nom;
+        if (nom == "q") {
+            break;
+        }
+
+       cout << "Prénom : ";
+       cin >> prenom;
+
+       cout << "Âge : ";
+        cin >> age;
+
+        listePersonnes.push_back({nom, prenom, age});
+    }
+
+    listePersonnes.sort(comparePerson); // Trie la liste en utilisant le prédicat comparePerson
+
+    cout << "Liste triée :\n";
+    for (const Person& personne : listePersonnes) {
+        cout << personne.nom << " " << personne.prenom << " (Âge : " << personne.age << ")\n";
+    }
+
+    return 0;
+}
