@@ -1,0 +1,84 @@
+#include <iostream>
+#include <list>
+#include <algorithm>
+
+void triBulle(std::list<int>& liste) {
+    for (auto it = liste.begin(); it != liste.end(); ++it) {
+        for (auto jt = std::next(it); jt != liste.end(); ++jt) {
+            if (*jt < *it) {
+                std::swap(*it, *jt);
+            }
+        }
+    }
+}
+
+void triSelection(std::list<int>& liste) {
+    for (auto it = liste.begin(); it != std::prev(liste.end()); ++it) {
+        auto minElement = it;
+        for (auto jt = std::next(it); jt != liste.end(); ++jt) {
+            if (*jt < *minElement) {
+                minElement = jt;
+            }
+        }
+        std::swap(*it, *minElement);
+    }
+}
+
+void triInsertion(std::list<int>& liste) {
+    for (auto it = std::next(liste.begin()); it != liste.end(); ++it) {
+        int valeur = *it;
+        auto jt = std::prev(it);
+        while (jt != liste.begin() && valeur < *jt) {
+            *std::next(jt) = *jt;
+            --jt;
+        }
+        *std::next(jt) = valeur;
+    }
+}
+
+int main() {
+    std::list<int> liste;
+
+    std::cout << "Entrez des entiers (0 pour terminer la saisie) : ";
+    int entier;
+    while (true) {
+        std::cin >> entier;
+        if (entier == 0) {
+            break;
+        }
+        liste.push_back(entier);
+    }
+
+    std::cout << "Liste non triée : ";
+    for (const int& valeur : liste) {
+        std::cout << valeur << " ";
+    }
+    std::cout << std::endl;
+
+    std::list<int> copieListe = liste;
+
+    triBulle(copieListe);
+    std::cout << "Tri à bulles : ";
+    for (const int& valeur : copieListe) {
+        std::cout << valeur << " ";
+    }
+    std::cout << std::endl;
+
+    copieListe = liste;
+    triSelection(copieListe);
+    std::cout << "Tri par sélection : ";
+    for (const int& valeur : copieListe) {
+        std::cout << valeur << " ";
+    }
+    std::cout << std::endl;
+
+    copieListe = liste;
+    triInsertion(copieListe);
+    std::cout << "Tri par insertion : ";
+    for (const int& valeur : copieListe) {
+        std::cout << valeur << " ";
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
