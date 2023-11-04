@@ -1,0 +1,20 @@
+#include <iostream>
+
+template <class T>
+class point {
+    T x, y; 
+
+public:
+    point(T abs, T ord) : x(abs), y(ord) {}
+
+    void affiche() {
+        std::cout << "Coordonnees : " << x << " " << y << "\n";
+    }
+};
+
+int main() {
+    point<int> p(60, 65);
+    p.affiche();
+
+    return 0;
+}
