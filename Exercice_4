@@ -1,0 +1,36 @@
+#include <iostream>
+#include <set>
+#include <vector>
+#include <list>
+#include <algorithm>
+template <typename InputIterator, typename T>
+bool recherche(const InputIterator& begin, const InputIterator& end, const T& valeur) {
+    return std::find(begin, end, valeur) != end;
+}
+
+int main() {
+    std::set<int> ensemble = {1, 2, 3, 4, 5};
+    int valeur = 3;
+    if (recherche(ensemble.begin(), ensemble.end(), valeur)) {
+        std::cout << valeur << " est présent dans l'ensemble.\n";
+    } else {
+        std::cout << valeur << " n'est pas présent dans l'ensemble.\n";
+    }
+    std::vector<std::string> vecteur = {"chat", "chien", "oiseau", "poisson"};
+    std::string animal = "chien";
+    if (recherche(vecteur.begin(), vecteur.end(), animal)) {
+        std::cout << animal << " est présent dans le vecteur.\n";
+    } else {
+        std::cout << animal << " n'est pas présent dans le vecteur.\n";
+    }
+
+    std::list<float> liste = {1.2, 3.4, 5.6, 7.8};
+    float valeur_float = 5.6;
+    if (recherche(liste.begin(), liste.end(), valeur_float)) {
+        std::cout << valeur_float << " est présent dans la liste.\n";
+    } else {
+        std::cout << valeur_float << " n'est pas présent dans la liste.\n";
+    }
+
+    return 0;
+}
